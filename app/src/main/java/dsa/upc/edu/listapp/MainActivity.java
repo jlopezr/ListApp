@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Based on http://www.vogella.com/tutorials/AndroidRecyclerView/article.html
+//      and https://zeroturnaround.com/rebellabs/getting-started-with-retrofit-2/
 
 public class MainActivity extends AppCompatActivity {
 
