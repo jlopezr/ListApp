@@ -1,5 +1,6 @@
 package dsa.upc.edu.listapp;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,18 +23,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        final SwipeRefreshLayout mySwipeRefreshLayout = findViewById(R.id.my_swipe_refresh);
+
+
         // use this setting to
         // improve performance if you know that changes
         // in content do not change the layout size
         // of the RecyclerView
         recyclerView.setHasFixedSize(true);
+
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
         final List<String> input = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             input.add("Test" + i);
-        }// define an adapter
+        }
+
+        // define an adapter
         mAdapter = new MyAdapter(input);
         recyclerView.setAdapter(mAdapter);
 
@@ -55,5 +63,20 @@ public class MainActivity extends AppCompatActivity {
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
 
+        mySwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        input.clear();
+                        for (int i = 0; i < 100; i++) {
+                            input.add("Test" + i);
+                        }
+                        mAdapter.notifyDataSetChanged();
+                        mySwipeRefreshLayout.setRefreshing(false);
+                    }
+                }
+        );
+
     }
+
 }
