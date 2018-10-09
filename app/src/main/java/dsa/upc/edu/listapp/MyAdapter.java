@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import dsa.upc.edu.listapp.github.Contributor;
@@ -22,6 +23,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // each data item is just a string in this case
         public TextView txtHeader;
         public TextView txtFooter;
+        public ImageView icon;
         public View layout;
 
         public ViewHolder(View v) {
@@ -29,6 +31,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             layout = v;
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
+            icon = (ImageView) v.findViewById(R.id.icon);
         }
     }
 
@@ -86,6 +89,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         });
 
         holder.txtFooter.setText("Contributions: " + c.contributions);
+
+        GlideApp.with(holder.icon.getContext())
+                .load(c.avatar_url)
+                .into(holder.icon);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
