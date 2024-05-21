@@ -9,6 +9,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.List;
 
+import dsa.upc.edu.listapp.github.API;
 import dsa.upc.edu.listapp.github.Contributor;
 import dsa.upc.edu.listapp.github.GitHub;
 import retrofit2.Call;
@@ -26,7 +27,7 @@ public class RetrofitActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GitHub gitHubService = GitHub.retrofit.create(GitHub.class);
+                GitHub gitHubService = API.getGithub();
                 Call<List<Contributor>> call = gitHubService.contributors("square", "retrofit");
 
                 call.enqueue(new Callback<List<Contributor>>() {

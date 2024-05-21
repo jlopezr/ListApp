@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import dsa.upc.edu.listapp.github.API;
 import dsa.upc.edu.listapp.github.Contributor;
 import dsa.upc.edu.listapp.github.GitHub;
 import retrofit2.Call;
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doApiCall(final SwipeRefreshLayout mySwipeRefreshLayout) {
-        GitHub gitHubService = GitHub.retrofit.create(GitHub.class);
+        GitHub gitHubService = API.getGithub();
         Call<List<Contributor>> call = gitHubService.contributors("square", "retrofit");
 
         call.enqueue(new Callback<List<Contributor>>() {
